@@ -5,18 +5,36 @@
  */
 package com.mycompany.reader;
 
+import java.io.File;
+import java.io.FileReader;
+import java.util.Scanner;
+
 /**
  *
  * @author DanyOctrome
  */
 public class ECGReader {
 
-    public ECGReader(String filename) {
-        //TODO
+    File f;
+    Scanner sc;
+    boolean header = true;
+
+    public ECGReader(String filename) throws Exception {
+        f = new File(filename);
+        sc = new Scanner(f);
     }
 
-    public int  getNextValue() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double getNextValue() {
+        if (header) {
+            //TODO Check the name
+            sc.nextLine();
+            header = false;
+        }
+        
+        if (sc.hasNext()) {
+            return Double.parseDouble(sc.nextLine());
+        }
+    return -1;
     }
-    
+
 }
