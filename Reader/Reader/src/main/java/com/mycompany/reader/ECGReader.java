@@ -6,12 +6,13 @@
 package com.mycompany.reader;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
 /**
  *
- * @author DanyOctrome
+ * @author Daniel Oliveira
  */
 public class ECGReader {
 
@@ -19,7 +20,7 @@ public class ECGReader {
     Scanner sc;
     boolean header = true;
 
-    public ECGReader(String filename) throws Exception {
+    public ECGReader(String filename) throws FileNotFoundException {
         f = new File(filename);
         sc = new Scanner(f);
     }
