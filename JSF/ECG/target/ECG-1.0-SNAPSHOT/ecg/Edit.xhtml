@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EcgEditDlg" widgetVar="EcgEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEcgTitle}">
+            <h:form id="EcgEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ecgController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEcgLabel_value}" for="value" />
+                        <p:inputText id="value" value="#{ecgController.selected.value}" title="#{bundle.EditEcgTitle_value}" required="true" requiredMessage="#{bundle.EditEcgRequiredMessage_value}"/>
+                        <p:outputLabel value="#{bundle.EditEcgLabel_timestamp}" for="timestamp" />
+                        <p:calendar id="timestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{ecgController.selected.timestamp}" title="#{bundle.EditEcgTitle_timestamp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEcgLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{ecgController.selected.id}" title="#{bundle.EditEcgTitle_id}" required="true" requiredMessage="#{bundle.EditEcgRequiredMessage_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ecgController.update}" value="#{bundle.Save}" update="display,:EcgListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EcgEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EcgEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
