@@ -21,6 +21,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
 /**
  *
  * @author Marco Macedo
+ * @author Daniel Oliveira
  */
 public class ECG_Producer {
     static Logger defaultLogger = LoggerFactory.getLogger(ECG_Producer.class);
