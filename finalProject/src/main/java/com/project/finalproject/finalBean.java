@@ -12,6 +12,14 @@ import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import com.rabbitmq.client.*;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.CategoryAxis;
+import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LineChartModel;
 
 /**
  *
@@ -25,10 +33,13 @@ public class finalBean {
     private Connection connection;
     private Channel channel;
     private Consumer consumer;
+    private LineChartModel chart;
+    private ChartSeries cs = new ChartSeries();
+    private int count = 0;
     /**
      * Creates a new instance of finalBean
      */
-    public finalBean() throws IOException {
+    public finalBean(LineChartModel chart) throws IOException {
         factory = new ConnectionFactory();
         factory.setHost("localhost");
         connection = factory.newConnection();
@@ -36,6 +47,8 @@ public class finalBean {
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
         initConsumer();
+        this.chart = chart;
+        cs.setLabel("Heart Rate");
     }
 
     private void initConsumer() throws IOException{
@@ -45,6 +58,7 @@ public class finalBean {
           throws IOException {
         String message = new String(body, "UTF-8");
         setValue(message);
+        setCView(message);
         System.out.println(" [x] Received '" + message + "'");
       }
     };
@@ -60,4 +74,24 @@ public class finalBean {
         return value;
     }
     
+    public void setCView(String value){
+        LineChartModel model = new LineChartModel();
+
+        //cs.set(new SimpleDateFormat("HHmmss").format(new Date()), Integer.parseInt(value.replaceAll(".0", "")));
+        cs.set(count++, Integer.parseInt(value.replaceAll(".0", "")));
+        
+        Map<Object, Number> temp = cs.getData();
+        
+        model.setTitle("Heart Rate Chart");
+        model.setLegendPosition("e");
+        model.setShowPointLabels(true);
+        model.getAxes().put(AxisType.X, new CategoryAxis("Time"));
+        Axis yAxis = model.getAxis(AxisType.Y);
+        yAxis.setLabel("Heart Rate");
+        yAxis.setMin(-5);
+        yAxis.setMax(200);
+        
+        model.addSeries(cs);
+        SharedChart.setChart(model);
+    }
 }
