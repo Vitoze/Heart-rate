@@ -28,6 +28,7 @@ import org.primefaces.model.chart.LineChartModel;
 @Named(value = "finalBean")
 @ApplicationScoped
 public class finalBean {
+
     private final static String QUEUE_NAME = "hello";
     private ConnectionFactory factory;
     private Connection connection;
@@ -36,6 +37,7 @@ public class finalBean {
     private LineChartModel chart;
     private ChartSeries cs = new ChartSeries();
     private int count = 0;
+
     /**
      * Creates a new instance of finalBean
      */
@@ -46,52 +48,39 @@ public class finalBean {
         channel = connection.createChannel();
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-        initConsumer();
         this.chart = chart;
         cs.setLabel("Heart Rate");
+        initConsumer();
     }
 
-    private void initConsumer() throws IOException{
+    private void initConsumer() throws IOException {
         consumer = new DefaultConsumer(channel) {
-        @Override
-        public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
-          throws IOException {
-        String message = new String(body, "UTF-8");
-        setValue(message);
-        setCView(message);
-        System.out.println(" [x] Received '" + message + "'");
-      }
-    };
-    channel.basicConsume(QUEUE_NAME, true, consumer);
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
+                    throws IOException {
+                String message = new String(body, "UTF-8");
+                setValue(message);
+                setCView(message);
+                System.out.println(" [x] Received '" + message + "'");
+            }
+        };
+        channel.basicConsume(QUEUE_NAME, true, consumer);
     }
     private String value;
-    
-    public void setValue(String v){
+
+    public void setValue(String v) {
         value = v;
     }
-    
-    public String getValue(){
+
+    public String getValue() {
         return value;
     }
-    
-    public void setCView(String value){
-        LineChartModel model = new LineChartModel();
 
-        //cs.set(new SimpleDateFormat("HHmmss").format(new Date()), Integer.parseInt(value.replaceAll(".0", "")));
-        cs.set(count++, Integer.parseInt(value.replaceAll(".0", "")));
-        
-        Map<Object, Number> temp = cs.getData();
-        
-        model.setTitle("Heart Rate Chart");
-        model.setLegendPosition("e");
-        model.setShowPointLabels(true);
-        model.getAxes().put(AxisType.X, new CategoryAxis("Time"));
-        Axis yAxis = model.getAxis(AxisType.Y);
-        yAxis.setLabel("Heart Rate");
-        yAxis.setMin(-5);
-        yAxis.setMax(200);
-        
-        model.addSeries(cs);
-        SharedChart.setChart(model);
+    public void setCView(String value) {
+        SharedChart.updateChart(Integer.parseInt(value.replaceAll(".0", "")));
+    }
+    
+    public LineChartModel getCView(){
+        return SharedChart.getChart();
     }
 }
