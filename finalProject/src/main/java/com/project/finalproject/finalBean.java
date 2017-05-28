@@ -70,14 +70,21 @@ public class finalBean {
 
     public void setValue(String v) {
         value = v;
+        if(Float.parseFloat(value)>150){
+            count++;
+        }
     }
 
     public String getValue() {
         return value;
     }
+    
+    public String getCount(){
+        return Integer.toString(count);
+    }
 
     public void setCView(String value) {
-        SharedChart.updateChart(Integer.parseInt(value.replaceAll(".0", "")));
+        SharedChart.updateChart(Math.round(Float.parseFloat(value)));
     }
     
     public LineChartModel getCView(){

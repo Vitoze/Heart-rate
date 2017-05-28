@@ -17,9 +17,9 @@ and open the template in the editor.
     <h:body>
         <f:view>
             <p:chart type="line" model="#{chartView.lineModel2}" style="height:300px;"/>
-       <h:form>
+            <h:form>
             <br/><br/>
-            <h:outputText value="The heart rate value is : #{finalBean.value}"/>
+            <h:outputText value="[ALARM COUNT] Heart Rate is greater than 150 : #{finalBean.count}"/>
              <br/><br/>
              <h:messages/>
         </h:form>  

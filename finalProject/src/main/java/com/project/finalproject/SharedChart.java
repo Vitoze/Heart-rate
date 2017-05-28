@@ -42,7 +42,7 @@ public class SharedChart {
         
         model.setTitle("Heart Rate Chart");
         model.setLegendPosition("e");
-        model.setShowPointLabels(true);
+        model.setShowPointLabels(false);
         model.getAxes().put(AxisType.X, new CategoryAxis("Time"));
         Axis yAxis = model.getAxis(AxisType.Y);
         yAxis.setLabel("Heart Rate");

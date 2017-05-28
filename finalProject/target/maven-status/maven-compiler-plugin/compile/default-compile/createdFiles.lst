@@ -1,7 +1,8 @@
-com\project\finalproject\Component.class
-com\project\finalproject\Recv$1.class
-com\project\finalproject\chartView.class
-com\project\finalproject\finalBean.class
-com\project\finalproject\Send.class
-com\project\finalproject\finalBean$1.class
-com\project\finalproject\Recv.class
+com/project/finalproject/Component.class
+com/project/finalproject/finalBean$1.class
+com/project/finalproject/Recv.class
+com/project/finalproject/SharedChart.class
+com/project/finalproject/finalBean.class
+com/project/finalproject/Recv$1.class
+com/project/finalproject/chartView.class
+com/project/finalproject/Send.class
