@@ -1,9 +1,0 @@
-com\human\ecg\AbstractFacade.class
-com\human\ecg\Ecg.class
-com\human\ecg\Ecg_.class
-com\human\ecg\EcgController.class
-com\human\ecg\util\JsfUtil$PersistAction.class
-com\human\ecg\ChartController.class
-com\human\ecg\util\JsfUtil.class
-com\human\ecg\EcgFacade.class
-com\human\ecg\EcgController$EcgControllerConverter.class
