@@ -1,0 +1,23 @@
+Running from: /usr/share/jenkins/jenkins.war
+webroot: EnvVars.masterEnvVars.get("JENKINS_HOME")
+May 28, 2017 4:49:23 PM winstone.Logger logInternal
+INFO: Beginning extraction from war file
+May 28, 2017 4:49:25 PM org.eclipse.jetty.util.log.JavaUtilLog info
+INFO: jetty-winstone-2.8
+May 28, 2017 4:49:27 PM org.eclipse.jetty.util.log.JavaUtilLog info
+INFO: NO JSP Support for , did not find org.apache.jasper.servlet.JspServlet
+Jenkins home directory: /var/jenkins_home found at: EnvVars.masterEnvVars.get("JENKINS_HOME")
+May 28, 2017 4:49:28 PM org.eclipse.jetty.util.log.JavaUtilLog info
+INFO: Started SelectChannelConnector@0.0.0.0:8080
+May 28, 2017 4:49:28 PM winstone.Logger logInternal
+INFO: Winstone Servlet Engine v2.0 running: controlPort=disabled
+May 28, 2017 4:49:28 PM jenkins.InitReactorRunner$1 onAttained
+INFO: Started initialization
+May 28, 2017 4:49:40 PM jenkins.InitReactorRunner$1 onAttained
+INFO: Listed all plugins
+May 28, 2017 4:49:40 PM jenkins.InitReactorRunner$1 onAttained
+INFO: Prepared all plugins
+May 28, 2017 4:49:40 PM jenkins.InitReactorRunner$1 onAttained
+INFO: Started all plugins
+May 28, 2017 4:49:44 PM jenkins.InitReactorRunner$1 onAttained
+INFO: Augmented all extensions
